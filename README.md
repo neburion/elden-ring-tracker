@@ -167,7 +167,7 @@ The scripts fall back to paths beside themselves when the `ER_*` variables are
 unset, so a plain checkout works with no arguments:
 
 ```bash
-cd modules/system/elden-ring-tracker
+git clone https://github.com/neburion/elden-ring-tracker && cd elden-ring-tracker
 python3 seed.py && python3 app.py --open   # 127.0.0.1:8777, db in this directory
 ```
 
@@ -205,7 +205,7 @@ key is derived from the password, so rotating the sops secret invalidates every
 outstanding cookie. Same mechanism as the reading tracker.
 
 That is a second gate, not the only one: the `tailscale0`-scoped firewall rule
-in `service.nix` still limits who can reach :8777, and the Cloudflare tunnel to
+the platform derives from `app.json` still limits who can reach :8777, and the Cloudflare tunnel to
 `eldenring.azuresalt.app` wants an Access policy in front of it — `cf-reconcile`
 does not manage Access, so a tunnel with no policy leans on Basic Auth alone.
 
