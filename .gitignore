@@ -1,0 +1,5 @@
+# State, not source. The ledger lives in $STATE_DIR on the host
+# (/var/lib/elden-ring-tracker) and beside this file when run from a checkout.
+eldenring.db
+eldenring.db-wal
+eldenring.db-shm

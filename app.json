@@ -1,0 +1,17 @@
+{
+  "name": "elden-ring-tracker",
+  "summary": "Elden Ring 100% ledger — 1,704 tickable units, SQLite, no framework",
+  "runtime": "python3",
+  "preStart": "seed.py",
+  "run": "app.py",
+  "port": 8777,
+  "urls": ["eldenring.azuresalt.app"],
+  "state": true,
+  "secrets": ["password"],
+  "env": {
+    "ER_HOST": "0.0.0.0",
+    "ER_PORT": "$PORT",
+    "ER_USERNAME": "tracker",
+    "ER_DB": "$STATE_DIR/eldenring.db"
+  }
+}
