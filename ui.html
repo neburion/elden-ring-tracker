@@ -7,6 +7,21 @@
 <meta name="theme-color" content="#E9E6DC" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#15150F" media="(prefers-color-scheme: dark)">
 <title>The Tarnished Ledger</title>
+
+<!-- Installed-app metadata. The manifest is what turns "add to home screen"
+     into a real launcher entry — its own window, its own task-switcher card,
+     no address bar — rather than a bookmark that opens a tab. iOS reads the
+     three apple- tags instead of most of the manifest, hence the overlap.
+     `black` and not `black-translucent`: nothing in this stylesheet pads for
+     safe-area-inset-top, so a translucent bar would put the header under the
+     notch. -->
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/pwa/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="/pwa/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Ledger">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <style>
 /* ── typefaces ─────────────────────────────────────────────────────────
    Self-hosted, built into the Nix store by service.nix. EB Garamond for
@@ -706,6 +721,18 @@ wide.addEventListener("change", placeIndex);
     if (t) t.scrollIntoView();
   }
 })();
+</script>
+
+<script>
+/* The worker caches nothing; see sw.js for why. It is registered because
+   Chromium will not offer to install a site that has not got one. Deferred
+   to `load` so it never competes with the first render, and silently ignored
+   on failure — an install prompt is not worth an error on a page that
+   otherwise works. */
+if ('serviceWorker' in navigator) {
+  addEventListener('load', () => navigator.serviceWorker.register('/sw.js')
+    .catch(() => {}));
+}
 </script>
 </body>
 </html>
